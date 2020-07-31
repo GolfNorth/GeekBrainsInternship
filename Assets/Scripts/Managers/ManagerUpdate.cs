@@ -15,6 +15,7 @@ namespace GeekBrainsInternship.Managers
         private readonly List<ITickable> _ticks = new List<ITickable>();
         private readonly List<ILateTickable> _lateTicks = new List<ILateTickable>();
         private readonly List<IFixedTickable> _fixedTicks = new List<IFixedTickable>();
+        private ManagerUpdateComponent _managerUpdateComponent;
 
         #endregion
         
@@ -91,13 +92,25 @@ namespace GeekBrainsInternship.Managers
         }
 
         #endregion
+
+
+        #region UnityMethods
+
+        private void OnDestroy()
+        {
+            if (_managerUpdateComponent != null)
+                Destroy(_managerUpdateComponent);
+        }
+
+        #endregion
         
 
         #region IInitializable
 
         public void Initialize()
         {
-            GameObject.Find(INSTALLERS).AddComponent<ManagerUpdateComponent>().Setup(this);
+            _managerUpdateComponent = GameObject.Find(INSTALLERS).AddComponent<ManagerUpdateComponent>();
+            _managerUpdateComponent.Setup(this);
         }
 
         #endregion

@@ -46,8 +46,11 @@ namespace GeekBrainsInternship.Core
 
         public static void Remove(Type type)
         {
-            if (!Instance._data.ContainsKey(type))
+            if (!Instance._data.TryGetValue(type, out var resolve))
                 return;
+
+            if (resolve is UnityObject unityObject)
+                Destroy(unityObject);
 
             Instance._data.Remove(type);
         }

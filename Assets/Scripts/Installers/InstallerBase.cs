@@ -25,6 +25,19 @@ namespace GeekBrainsInternship.Installers
                 Director.Add(manager);
             }
         }
+        
+        protected void OnApplicationQuit()
+        {
+            OnDestroy();
+        }
+        
+        protected void OnDestroy()
+        {
+            foreach (var manager in _managers)
+            {
+                Director.Remove(manager.GetType());
+            }
+        }
 
         #endregion
     }
