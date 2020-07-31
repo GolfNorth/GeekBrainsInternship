@@ -6,19 +6,19 @@ using UnityEngine;
 
 namespace GeekBrainsInternship.Installers
 {
-    public sealed class SceneInstaller : MonoBehaviour
+    public class InstallerBase : MonoBehaviour
     {
         #region Fields
 
         [SerializeField]
-        private List<ManagerBase> _managers = new List<ManagerBase>();
+        protected List<ManagerBase> _managers = new List<ManagerBase>();
 
         #endregion
         
         
         #region UnityMethods
 
-        private void Awake()
+        protected void Awake()
         {
             foreach (var manager in _managers)
             {
