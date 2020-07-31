@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GeekBrainsInternship.Installers
 {
-    public class InstallerBase : MonoBehaviour
+    public abstract class InstallerBase : MonoBehaviour
     {
         #region Fields
 

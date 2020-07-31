@@ -3,7 +3,7 @@
 
 namespace GeekBrainsInternship.Managers
 {
-    public class ManagerUpdateComponent : MonoBehaviour
+    public sealed class ManagerUpdateComponent : MonoBehaviour
     {
         #region Fields
 

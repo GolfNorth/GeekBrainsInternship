@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Panda
 {
-    public class PandaComponent : MonoBehaviour, ITickable, IFixedTickable
+    public sealed class PandaComponent : MonoBehaviour, ITickable, IFixedTickable
     {
         #region Fields
 

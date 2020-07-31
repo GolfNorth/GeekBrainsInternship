@@ -6,7 +6,7 @@ using UnityObject = UnityEngine.Object;
 
 namespace GeekBrainsInternship.Core
 {
-    public class Director : Singleton<Director>
+    public sealed class Director : Singleton<Director>
     {
         #region Fields
         

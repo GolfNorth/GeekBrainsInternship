@@ -1,6 +1,6 @@
 ﻿namespace GeekBrainsInternship.Installers
 {
-    public class InstallerProject : InstallerBase
+    public sealed class InstallerProject : InstallerBase
     {
         #region UnityMethods
 

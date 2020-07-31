@@ -7,7 +7,7 @@ using UnityEngine;
 namespace GeekBrainsInternship.Managers
 {
     [CreateAssetMenu(fileName = "ManagerUpdate",menuName = "Managers/ManagerUpdate")]
-    public class ManagerUpdate : ManagerBase, IInitializable
+    public sealed class ManagerUpdate : ManagerBase, IInitializable
     {
         #region Fields
 
