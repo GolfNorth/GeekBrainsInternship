@@ -33,6 +33,9 @@ namespace GeekBrainsInternship.Installers
         
         protected void OnDestroy()
         {
+            if (Director.Instance == null)
+                return;
+            
             foreach (var manager in _managers)
             {
                 Director.Remove(manager.GetType());
