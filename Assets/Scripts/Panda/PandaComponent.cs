@@ -24,7 +24,7 @@ namespace Panda
 
         private void Awake()
         {
-            Director.Get<ManagerUpdate>().Add(this);
+            Director.Get<UpdateManager>().Add(this);
         }
 
         #endregion

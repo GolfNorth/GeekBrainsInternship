@@ -6,16 +6,15 @@ using UnityEngine;
 
 namespace GeekBrainsInternship.Managers
 {
-    [CreateAssetMenu(fileName = "ManagerUpdate",menuName = "Managers/ManagerUpdate")]
-    public sealed class ManagerUpdate : ManagerBase, IInitializable
+    [CreateAssetMenu(fileName = "UpdateManager",menuName = "GolfNorth/Managers/Update Manager")]
+    public sealed class UpdateManager : Manager, IInitializable
     {
         #region Fields
-
-        private const string INSTALLERS = "[INSTALLERS]";
+        
         private readonly List<ITickable> _ticks = new List<ITickable>();
         private readonly List<ILateTickable> _lateTicks = new List<ILateTickable>();
         private readonly List<IFixedTickable> _fixedTicks = new List<IFixedTickable>();
-        private ManagerUpdateComponent _managerUpdateComponent;
+        private UpdateManagerComponent _updateManagerComponent;
 
         #endregion
         
@@ -24,7 +23,7 @@ namespace GeekBrainsInternship.Managers
 
         public void Add(object updatable)
         {
-            var managerUpdate = Director.Get<ManagerUpdate>();
+            var managerUpdate = Director.Get<UpdateManager>();
 
             if (updatable is IInitializable initializable)
             {
@@ -49,7 +48,7 @@ namespace GeekBrainsInternship.Managers
         
         public void Remove(object updatable)
         {
-            var managerUpdate = Director.Get<ManagerUpdate>();
+            var managerUpdate = Director.Get<UpdateManager>();
             
             if (updatable is ITickable tick)
             {
@@ -98,8 +97,8 @@ namespace GeekBrainsInternship.Managers
 
         private void OnDestroy()
         {
-            if (_managerUpdateComponent != null)
-                Destroy(_managerUpdateComponent);
+            if (_updateManagerComponent != null)
+                Destroy(_updateManagerComponent);
         }
 
         #endregion
@@ -109,8 +108,8 @@ namespace GeekBrainsInternship.Managers
 
         public void Initialize()
         {
-            _managerUpdateComponent = GameObject.Find(INSTALLERS).AddComponent<ManagerUpdateComponent>();
-            _managerUpdateComponent.Setup(this);
+            _updateManagerComponent = AddComponent<UpdateManagerComponent>();
+            _updateManagerComponent.Setup(this);
         }
 
         #endregion

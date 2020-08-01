@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using GeekBrainsInternship.Interfaces;
+﻿using System.Collections.Generic;
+using GeekBrainsInternship.Contexts;
 using UnityObject = UnityEngine.Object;
 
 
@@ -9,57 +8,53 @@ namespace GeekBrainsInternship.Core
     public sealed class Director : Singleton<Director>
     {
         #region Fields
-        
-        private readonly Dictionary<Type, object> _data = new Dictionary<Type, object>();
+
+        private readonly List<Context> _contexts = new List<Context>();
 
         #endregion
 
 
+        #region UnityMethods
+
+        private void Start()
+        {
+            gameObject.name = "[director]";
+        }
+
+        #endregion
+        
+
         #region Methods
 
-        public static void Add(UnityObject obj)
+        public static void AddContext(Context context)
         {
-            var type = obj.GetType();
-            
-            if (Instance._data.ContainsKey(type))
+            if (Instance == null || Instance._contexts.Contains(context))
                 return;
             
-            var add = Instantiate(obj);
-                
-            Instance._data.Add(type, add);
-
-            if (add is IInitializable initializable)
-            {
-                initializable.Initialize();
-            }
+            Instance._contexts.Add(context);
         }
         
-        public static void Add(object obj)
+        public static void RemoveContext(Context context)
         {
-            var type = obj.GetType();
-            
-            if (Instance._data.ContainsKey(type))
+            if (Instance == null || Instance._contexts.Contains(context))
                 return;
             
-            Instance._data.Add(type, obj);
-        }
-
-        public static void Remove(Type type)
-        {
-            if (!Instance._data.TryGetValue(type, out var resolve))
-                return;
-
-            if (resolve is UnityObject unityObject)
-                Destroy(unityObject);
-
-            Instance._data.Remove(type);
+            Instance._contexts.Remove(context);
         }
 	
         public static T Get<T>()
         {
-            Instance._data.TryGetValue(typeof(T), out var resolve);
-            
-            return (T) resolve;
+            var resolve = default(T);
+
+            foreach (var context in Instance._contexts)
+            {
+                resolve = context.Get<T>(out var success);
+
+                if (success)
+                    return resolve;
+            }
+
+            return resolve;
         }
 
         #endregion

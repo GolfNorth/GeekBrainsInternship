@@ -3,20 +3,20 @@
 
 namespace GeekBrainsInternship.Managers
 {
-    public sealed class ManagerUpdateComponent : MonoBehaviour
+    public sealed class UpdateManagerComponent : MonoBehaviour
     {
         #region Fields
 
-        private ManagerUpdate _manager;
+        private UpdateManager _updateManager;
 
         #endregion
         
 
         #region Methods
 
-        public void Setup(ManagerUpdate manager)
+        public void Setup(UpdateManager updateManager)
         {
-            _manager = manager;
+            _updateManager = updateManager;
         }
 
         #endregion
@@ -26,18 +26,18 @@ namespace GeekBrainsInternship.Managers
 
         private void Update()
         {
-            _manager.Tick();
+            _updateManager.Tick();
         }
 
         private void FixedUpdate()
         {
-            _manager.TickFixed();
+            _updateManager.TickFixed();
         }
 
 
         private void LateUpdate()
         {
-            _manager.TickLate();
+            _updateManager.TickLate();
         }
 
         #endregion
